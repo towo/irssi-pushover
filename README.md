@@ -5,6 +5,15 @@ This is a simple irssi plugin to forward mentions you receive in your
 [irssi](http://irssi.org) IRC client to the [Pushover](http://pushover.net)
 service.
 
+Prerequisites
+-------------
+* irssi (duh)
+* LWP::UserAgent
+* Net::HTTPS or Crypt::SSLeay
+* IO::Socket::SSL
+
+Settings
+--------
 It will export three new options to your irssi configuration:
 * `pushover_enable`: Does what it says, enables the pushover integration.
 * `pushover_api_token`: The API token of the application. By default, towo's API key is supplied, but this may be subject to change depending on whatever Pushover's doing.
@@ -14,7 +23,6 @@ New users will have to define the `pushover_target_user` and then toggle `pushov
 
 Licensing
 ---------
-
 No worries, simple GPL3, i.e.:
 >   This program is free software: you can redistribute it and/or modify
 >   it under the terms of the GNU General Public License as published by
