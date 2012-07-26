@@ -19,7 +19,7 @@ use strict;
 use warnings;
 use vars qw($VERSION %IRSSI);
 
-$VERSION = "20120725-1";
+$VERSION = "20120726-1";
 %IRSSI = (
 	authors     => 'Tobias \'towo\' Wolter',
 	contact     => 'irssi@towo.eu',
@@ -51,6 +51,16 @@ sub create_title {
 	}
 }
 
+# check if we're actually allowed to send a notification
+sub allowed_to_send {
+	my $server = shift;
+	# filter to check for away status
+	if (Irssi::settings_get_bool('pushover_away_only')) {
+		return 0 unless ($server->{usermode_away});
+	}
+	return 1;
+}
+
 # check if api token and target user are set to something
 sub sanity_check {
 	if (Irssi::settings_get_str('pushover_api_token') =~ m/^\s*$/) {
@@ -80,7 +90,7 @@ sub send_to_pushover {
 	if ($response->is_error()) {
 		# FIXME: this is lazy
 		Irssi::print("Pushover returned an error while sending, please correct"
-		           . " the mistake by analyzing this statement sent by the pushover API:\n"
+		           . " the mistake by analyzing this statement:\n"
 		           . $response->decoded_content
 		           . "\nDisabling pushover notifications.");
 		Irssi::settings_set_bool('pushover_enable', 0);
@@ -90,16 +100,15 @@ sub send_to_pushover {
 # handles the processing of messages
 sub event_handler {
 	my ($server, $msg, $nick, $address, $target) = @_;
-	if (Irssi::settings_get_bool('pushover_enable')) {
-		if (&sanity_check) {
-			if ($target) {
-				# public message
-				send_to_pushover('public', $target, "<$nick> $msg") if ($msg =~ m/$server->{'nick'}/);
-			} else {
-				# private message
-				send_to_pushover('private', $nick, $msg);
-			}
-		}
+	return unless (Irssi::settings_get_bool('pushover_enable'));
+	return unless (&allowed_to_send($server));
+	return unless (&sanity_check);
+	if ($target) {
+		# public message
+		send_to_pushover('public', $target, "<$nick> $msg") if ($msg =~ m/$server->{'nick'}/);
+	} else {
+		# private message
+		send_to_pushover('private', $nick, $msg);
 	}
 }
 
@@ -111,7 +120,7 @@ Irssi::signal_add("message private", "event_handler");
 Irssi::settings_add_bool('misc', 'pushover_enable', 0);
 Irssi::settings_add_str('misc', 'pushover_api_token', 'iV2kqvQaDnUEOK4UIIT9HtXnL0RtGL');
 Irssi::settings_add_str('misc', 'pushover_target_user', '');
+Irssi::settings_add_bool('misc', 'pushover_away_only', '1');
 
 # TODO: possibly define device targets
 # TODO: possibly define which levels should be forwarded to pushover
-# TODO: toggle to only send hilights when away
