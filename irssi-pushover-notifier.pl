@@ -120,10 +120,10 @@ sub event_handler {
 Irssi::signal_add("message public", "event_handler");
 Irssi::signal_add("message private", "event_handler");
 
-# relevant settings; self-explanatory; FIXME: categories
-Irssi::settings_add_bool('misc', 'pushover_enable', 0);
-Irssi::settings_add_str('misc', 'pushover_api_token', 'iV2kqvQaDnUEOK4UIIT9HtXnL0RtGL');
-Irssi::settings_add_str('misc', 'pushover_target_user', '');
-Irssi::settings_add_str('misc', 'pushover_target_device', '');
-Irssi::settings_add_bool('misc', 'pushover_away_only', '1');
+# relevant settings; self-explanatory
+Irssi::settings_add_bool('pushover', 'pushover_enable', 0);
+Irssi::settings_add_str('pushover', 'pushover_api_token', 'iV2kqvQaDnUEOK4UIIT9HtXnL0RtGL');
+Irssi::settings_add_str('pushover', 'pushover_target_user', '');
+Irssi::settings_add_str('pushover', 'pushover_target_device', '');
+Irssi::settings_add_bool('pushover', 'pushover_away_only', '1');
 # TODO: possibly define which levels should be forwarded to pushover
