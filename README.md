@@ -14,10 +14,13 @@ Prerequisites
 
 Settings
 --------
-It will export three new options to your irssi configuration:
+It will export new options to your irssi configuration:
+
 * `pushover_enable`: Does what it says, enables the pushover integration.
 * `pushover_api_token`: The API token of the application. By default, towo's API key is supplied, but this may be subject to change depending on whatever Pushover's doing.
 * `pushover_target_user`: The user token of the Pushover user who's supposed to get the messages. It's given on [your Pushover dashboard](http://pushover.net).
+* `pushover_target_device`: The device name on the target Pushover account that's supposed to get the message. Specify a single device name or leave blank to send to all.
+* `pushover_away_only`: Only send messages via Pushover if the user is currently away (on the server the message was received).
 
 New users will have to define the `pushover_target_user` and then toggle `pushover_enable`. Everything _should_ go fine after that, and you should receive spammy messages on your phone rather rapidly. If you're popular, that is.
 
