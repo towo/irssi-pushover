@@ -86,6 +86,10 @@ sub send_to_pushover {
 		'message' => $message,
 	);
 
+	if (Irssi::settings_get_str('pushover_target_device')) {
+		$request{device} = Irssi::settings_get_str('pushover_target_device');
+	}
+
 	$response = $api->post( $apiurl, \%request );
 	if ($response->is_error()) {
 		# FIXME: this is lazy
@@ -120,7 +124,6 @@ Irssi::signal_add("message private", "event_handler");
 Irssi::settings_add_bool('misc', 'pushover_enable', 0);
 Irssi::settings_add_str('misc', 'pushover_api_token', 'iV2kqvQaDnUEOK4UIIT9HtXnL0RtGL');
 Irssi::settings_add_str('misc', 'pushover_target_user', '');
+Irssi::settings_add_str('misc', 'pushover_target_device', '');
 Irssi::settings_add_bool('misc', 'pushover_away_only', '1');
-
-# TODO: possibly define device targets
 # TODO: possibly define which levels should be forwarded to pushover
