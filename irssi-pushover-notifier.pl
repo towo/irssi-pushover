@@ -19,7 +19,7 @@ use strict;
 use warnings;
 use vars qw($VERSION %IRSSI);
 
-$VERSION = "20120726-1";
+$VERSION = "20120807-1";
 %IRSSI = (
 	authors     => 'Tobias \'towo\' Wolter',
 	contact     => 'irssi@towo.eu',
@@ -126,4 +126,3 @@ Irssi::settings_add_str('pushover', 'pushover_api_token', 'iV2kqvQaDnUEOK4UIIT9H
 Irssi::settings_add_str('pushover', 'pushover_target_user', '');
 Irssi::settings_add_str('pushover', 'pushover_target_device', '');
 Irssi::settings_add_bool('pushover', 'pushover_away_only', '1');
-# TODO: possibly define which levels should be forwarded to pushover
