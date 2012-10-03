@@ -81,7 +81,7 @@ sub send_to_pushover {
 	my ($type, $target, $message) = @_;
 
 	# drop message if empty line
-	return if ($message =~ m/^\s+$/);
+	return if ($message =~ m/^\s*$/);
 
 	my %request = (
 		'token' => Irssi::settings_get_str('pushover_api_token'),
