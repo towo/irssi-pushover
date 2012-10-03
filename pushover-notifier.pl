@@ -19,7 +19,7 @@ use strict;
 use warnings;
 use vars qw($VERSION %IRSSI);
 
-$VERSION = "20120807-1";
+$VERSION = "20121003-1";
 %IRSSI = (
 	authors     => 'Tobias \'towo\' Wolter',
 	contact     => 'irssi@towo.eu',
@@ -79,6 +79,10 @@ sub sanity_check {
 # send the request to pushover
 sub send_to_pushover {
 	my ($type, $target, $message) = @_;
+
+	# drop message if empty line
+	return if ($message =~ m/^\s+$/);
+
 	my %request = (
 		'token' => Irssi::settings_get_str('pushover_api_token'),
 		'user' => Irssi::settings_get_str('pushover_target_user'),
