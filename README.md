@@ -1,5 +1,5 @@
-irssi-notifier-perl
-===================
+irssi-pushover
+==============
 
 This is a simple irssi plugin to forward mentions you receive in your
 [irssi](http://irssi.org) IRC client to the [Pushover](http://pushover.net)

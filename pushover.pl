@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# irssi-pushover-notifier by Tobias 'towo' Wolter <irssi@towo.eu>
+# irssi-pushover by Tobias 'towo' Wolter <irssi@towo.eu>
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
@@ -23,10 +23,10 @@ $VERSION = "20121003-1";
 %IRSSI = (
 	authors     => 'Tobias \'towo\' Wolter',
 	contact     => 'irssi@towo.eu',
-	name        => 'irssi-pushover-notifier',
+	name        => 'irssi-pushover',
 	description => 'Sends irssi mentions and messages via Pushover',
 	license     => 'GPLv3',
-	url         => 'http://github.com/towo/irssi-pushover-notifier',
+	url         => 'http://github.com/towo/irssi-pushover',
 );
 
 
@@ -35,7 +35,7 @@ my $apiurl = 'https://api.pushover.net/1/messages.json';
 my $response;
 
 # some niceties
-$api->agent("irssi-pushover-notifier/$VERSION");
+$api->agent("irssi-pushover/$VERSION");
 $api->env_proxy;
 $api->timeout(5); # too long timeouts would foul up IRC experience
 
